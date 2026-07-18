@@ -43,10 +43,9 @@ BikeCompany-Data-Warehouse-ETL/
         └── facts/
             ├── load_fact_sales.ktr
             └── load_fact_order_duration.ktr
-
 ```
 
-## Data Warehouse Architecture
+## DW Architecture
 
 The data warehouse follows a **constellation schema** (fact constellation), consisting of:
 
@@ -69,12 +68,12 @@ The ETL process follows a **dimension-first, fact-second** loading order to main
 ## How to Run
 
 1. **Restore the source database**  
-   Restore `BikeCompany.bak` in SQL Server as the source OLTP database.  
+   Restore [`Database/BikeCompany.bak`](Database/BikeCompany.bak) in SQL Server as the source OLTP database.  
    > The database name is referenced in the Kettle connections. Please ensure it matches your environment.
 
 2. **Create the target data warehouse database**  
    Create a new database named `BikeCompany_DW` in SQL Server.  
-   > Do **not** restore `BikeCompany_DW.bak`. This is an empty target database where the ETL process will load the transformed data.
+   > Do **not** restore [`Database/BikeCompany_DW.bak`](Database/BikeCompany_DW.bak). This is an empty target database where the ETL process will load the transformed data.
 
 3. **Place the ETL files in your Kettle workspace**  
    Copy all `.ktr` and `.kjb` files to your local Kettle repository or working directory.  
@@ -88,8 +87,8 @@ The ETL process follows a **dimension-first, fact-second** loading order to main
    - Ensure both connections are tested successfully.
 
 5. **Run the main job**  
-   Open `kjb_work.kjb` in Spoon and run it.  
-   > This job orchestrates the entire ETL process: it will call all dimension table loads (`load_dim_*.ktr`) first, followed by fact table loads (`load_fact_*.ktr`) in the correct dependency order.
+   Open [`ETL/jobs/kjb_work.kjb`](ETL/jobs/kjb_work.kjb) in Spoon and run it.  
+   > This job orchestrates the entire ETL process: it will call all dimension table loads (`load_dim_*.ktr`) in [`ETL/transformations/dimensions/`](ETL/transformations/dimensions/) first, followed by fact table loads (`load_fact_*.ktr`) in [`ETL/transformations/facts/`](ETL/transformations/facts/) in the correct dependency order.
 
 6. **Verify the results**  
    After the job completes, check the `BikeCompany_DW` database to confirm that all dimension and fact tables are populated successfully.
