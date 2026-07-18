@@ -20,7 +20,7 @@ BikeCompany-Data-Warehouse-ETL/
 │   └── flows/
 │       ├── load_dims.png
 │       ├── load_facts.png   
-│       └── kjb_job.png              
+│       └── kjb_work.png              
 │
 ├── Database/
 │   ├── BikeCompany.bak                    
@@ -28,7 +28,7 @@ BikeCompany-Data-Warehouse-ETL/
 │
 └── ETL/
     ├── jobs/
-    │   └── kjb_job.kjb                       
+    │   └── kjb_work.kjb                       
     │
     └── transformations/
         ├── dimensions/
@@ -88,7 +88,7 @@ The ETL process follows a **dimension-first, fact-second** loading order to main
    - Ensure both connections are tested successfully.
 
 5. **Run the main job**  
-   Open `kjb_job.kjb` in Spoon and run it.  
+   Open `kjb_work.kjb` in Spoon and run it.  
    > This job orchestrates the entire ETL process: it will call all dimension table loads (`load_dim_*.ktr`) first, followed by fact table loads (`load_fact_*.ktr`) in the correct dependency order.
 
 6. **Verify the results**  
